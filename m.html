@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YS DEV | Suleiman Yusuf Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    :root{
+      --bg:#050816;
+      --card:#0f172a;
+      --primary:#3b82f6;
+      --secondary:#06b6d4;
+      --text:#ffffff;
+      --gray:#94a3b8;
+      --border:rgba(255,255,255,.08);
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    body::-webkit-scrollbar{
+      width:10px;
+    }
+
+    body::-webkit-scrollbar-thumb{
+      background:linear-gradient(var(--primary),var(--secondary));
+      border-radius:20px;
+    }
+
+    .container{
+      width:90%;
+      max-width:1300px;
+      margin:auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    
+  .project-card{
+    cursor:pointer;
+  }
+
+  .project-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    backdrop-filter:blur(10px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    opacity:0;
+    visibility:hidden;
+    transition:.4s;
+    padding:20px;
+  }
+
+  .project-modal.active{
+    opacity:1;
+    visibility:visible;
+  }
+
+  .modal-card{
+    width:100%;
+    max-width:750px;
+    background:linear-gradient(145deg,#0f172a,#020617);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:35px;
+    padding:45px;
+    position:relative;
+    transform:translateY(40px) scale(.9);
+    transition:.4s;
+    box-shadow:0 30px 100px rgba(37,99,235,.25);
+  }
+
+  .project-modal.active .modal-card{
+    transform:translateY(0) scale(1);
+  }
+
+  .close-modal{
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    color:white;
+    cursor:pointer;
+    font-size:1.2rem;
+    transition:.3s;
+  }
+
+  .close-modal:hover{
+    background:#2563eb;
+    transform:rotate(90deg);
+  }
+
+  .modal-header h1{
+    font-size:2.5rem;
+    margin-bottom:15px;
+    background:linear-gradient(to right,#3b82f6,#06b6d4);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  .modal-header p{
+    color:#60a5fa;
+    font-weight:600;
+    margin-bottom:30px;
+  }
+
+  .modal-body p{
+    color:#cbd5e1;
+    line-height:2;
+    font-size:1.05rem;
+  }
+
+  .modal-footer{
+    margin-top:40px;
+  }
+
+  @media(max-width:768px){
+
+    .modal-card{
+      padding:30px;
+    }
+
+    .modal-header h1{
+      font-size:2rem;
+    }
+
+  }
+
+
+    header{
+      position:fixed;
+      top:0;
+      width:100%;
+      z-index:999;
+      background:rgba(5,8,22,.75);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 0;
+    }
+
+    .logo{
+      font-size:1.5rem;
+      font-weight:900;
+      background:linear-gradient(to right,#3b82f6,#06b6d4);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:30px;
+      list-style:none;
+    }
+
+    .nav-links a{
+      color:white;
+      text-decoration:none;
+      transition:.3s;
+      font-weight:600;
+      position:relative;
+    }
+
+    .nav-links a::after{
+      content:'';
+      position:absolute;
+      width:0%;
+      height:2px;
+      left:0;
+      bottom:-5px;
+      background:linear-gradient(to right,#3b82f6,#06b6d4);
+      transition:.3s;
+    }
+
+    .nav-links a:hover::after{
+      width:100%;
+    }
+
+    .menu-btn{
+      display:none;
+      font-size:2rem;
+      cursor:pointer;
+    }
+
+    /* =========================
+       HERO SECTION
+    ========================== */
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+      padding-top:120px;
+    }
+
+    .hero::before{
+      content:'';
+      position:absolute;
+      width:500px;
+      height:500px;
+      background:#2563eb;
+      filter:blur(180px);
+      opacity:.25;
+      top:-120px;
+      right:-100px;
+    }
+
+    .hero-content{
+      display:grid;
+      grid-template-columns:1.2fr 1fr;
+      gap:60px;
+      align-items:center;
+    }
+
+    .hero-text h3{
+      color:#60a5fa;
+      margin-bottom:20px;
+      font-size:1rem;
+      letter-spacing:1px;
+    }
+
+    .hero-text h1{
+      font-size:5rem;
+      line-height:1;
+      font-weight:900;
+      margin-bottom:25px;
+    }
+
+    .hero-text h1 span{
+      background:linear-gradient(to right,#3b82f6,#06b6d4);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero-text p{
+      color:var(--gray);
+      line-height:1.9;
+      margin-bottom:35px;
+      font-size:1.05rem;
+    }
+
+    .buttons{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:16px 34px;
+      border-radius:16px;
+      font-weight:700;
+      text-decoration:none;
+      transition:.4s;
+      border:none;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .primary{
+      background:linear-gradient(to right,#2563eb,#06b6d4);
+      color:white;
+      box-shadow:0 10px 30px rgba(37,99,235,.35);
+    }
+
+    .primary:hover{
+      transform:translateY(-5px);
+    }
+
+    .secondary{
+      border:1px solid rgba(255,255,255,.15);
+      color:white;
+      background:transparent;
+    }
+
+    .secondary:hover{
+      background:rgba(255,255,255,.05);
+      border-color:#3b82f6;
+    }
+
+    /* =========================
+       PROFILE CARD
+    ========================== */
+
+    .hero-right{
+      position:relative;
+    }
+
+    .profile-card{
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:35px;
+      padding:35px;
+      backdrop-filter:blur(14px);
+      position:relative;
+      overflow:hidden;
+      animation:float 5s ease-in-out infinite;
+    }
+
+    .profile-card::before{
+      content:'';
+      position:absolute;
+      width:300px;
+      height:300px;
+      background:rgba(37,99,235,.18);
+      border-radius:50%;
+      top:-120px;
+      right:-120px;
+      filter:blur(40px);
+    }
+
+    .profile-image{
+      width:220px;
+      height:220px;
+      margin:auto;
+      border-radius:50%;
+      overflow:hidden;
+      border:5px solid rgba(59,130,246,.4);
+      box-shadow:0 0 40px rgba(37,99,235,.4);
+      margin-bottom:30px;
+    }
+
+    .profile-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .profile-card h2{
+      text-align:center;
+      margin-bottom:10px;
+      font-size:2rem;
+    }
+
+    .profile-card p{
+      text-align:center;
+      color:var(--gray);
+      margin-bottom:30px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:15px;
+    }
+
+    .stat{
+      background:rgba(255,255,255,.04);
+      padding:20px;
+      border-radius:18px;
+      text-align:center;
+      border:1px solid rgba(255,255,255,.05);
+    }
+
+    .stat h1{
+      color:#60a5fa;
+      margin-bottom:5px;
+    }
+
+    /* =========================
+       GENERAL
+    ========================== */
+
+    section{
+      padding:110px 0;
+    }
+
+    .section-title{
+      font-size:3rem;
+      margin-bottom:20px;
+      font-weight:900;
+      text-align:center;
+    }
+
+    .section-title span{
+      background:linear-gradient(to right,#3b82f6,#06b6d4);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .section-desc{
+      max-width:850px;
+      margin:auto;
+      text-align:center;
+      color:var(--gray);
+      line-height:1.9;
+      margin-bottom:70px;
+    }
+
+    /* =========================
+       ABOUT
+    ========================== */
+
+    .about-box{
+      background:linear-gradient(145deg,#0f172a,#020617);
+      border:1px solid rgba(255,255,255,.06);
+      padding:50px;
+      border-radius:35px;
+      line-height:2;
+      color:#cbd5e1;
+      font-size:1.05rem;
+    }
+
+    /* =========================
+       SKILLS
+    ========================== */
+
+    .skills-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:25px;
+    }
+
+    .skill-card{
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+      border-radius:24px;
+      padding:25px;
+      transition:.4s;
+    }
+
+    .skill-card:hover{
+      transform:translateY(-10px);
+      border-color:#3b82f6;
+      box-shadow:0 20px 50px rgba(37,99,235,.15);
+    }
+
+    .skill-top{
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:18px;
+      font-weight:700;
+    }
+
+    .progress{
+      width:100%;
+      height:12px;
+      background:rgba(255,255,255,.08);
+      border-radius:30px;
+      overflow:hidden;
+    }
+
+    .progress-bar{
+      height:100%;
+      border-radius:30px;
+      background:linear-gradient(to right,#3b82f6,#06b6d4);
+      width:0;
+      transition:2s ease;
+    }
+
+    /* =========================
+       PROJECTS
+    ========================== */
+
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+      gap:30px;
+    }
+
+    .project-card{
+      background:linear-gradient(145deg,#0f172a,#020617);
+      border-radius:30px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.06);
+      transition:.5s;
+      position:relative;
+    }
+
+    .project-card:hover{
+      transform:translateY(-12px);
+      border-color:#3b82f6;
+      box-shadow:0 25px 70px rgba(37,99,235,.2);
+    }
+
+    .project-top{
+      height:220px;
+      background:linear-gradient(to right,#2563eb,#06b6d4);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:2rem;
+      font-weight:900;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .project-top::before{
+      content:'';
+      position:absolute;
+      width:120%;
+      height:120%;
+      background:rgba(255,255,255,.12);
+      transform:rotate(25deg);
+      left:-140%;
+      transition:1s;
+    }
+
+    .project-card:hover .project-top::before{
+      left:120%;
+    }
+
+    .project-content{
+      padding:30px;
+    }
+
+    .project-content h2{
+      margin-bottom:15px;
+      font-size:1.6rem;
+    }
+
+    .project-content p{
+      color:var(--gray);
+      line-height:1.8;
+      margin-bottom:25px;
+    }
+
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .tag{
+      padding:9px 14px;
+      background:rgba(255,255,255,.05);
+      border-radius:30px;
+      font-size:.85rem;
+      border:1px solid rgba(255,255,255,.06);
+    }
+
+    /* =========================
+       CONTACT
+    ========================== */
+
+    .contact-container{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:40px;
+    }
+
+    .contact-info,
+    .contact-form{
+      background:linear-gradient(145deg,#0f172a,#020617);
+      padding:40px;
+      border-radius:30px;
+      border:1px solid rgba(255,255,255,.06);
+    }
+
+    .contact-info h2,
+    .contact-form h2{
+      margin-bottom:20px;
+      font-size:2rem;
+    }
+
+    .contact-info p{
+      color:var(--gray);
+      line-height:1.8;
+      margin-bottom:30px;
+    }
+
+    .contact-item{
+      margin-bottom:20px;
+    }
+
+    .contact-item span{
+      display:block;
+      color:#60a5fa;
+      margin-bottom:5px;
+      font-weight:700;
+    }
+
+    .form-group{
+      margin-bottom:20px;
+    }
+
+    .form-group input,
+    .form-group textarea{
+      width:100%;
+      padding:16px;
+      border:none;
+      outline:none;
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      color:white;
+      border:1px solid rgba(255,255,255,.05);
+      font-family:inherit;
+    }
+
+    .form-group textarea{
+      resize:none;
+      height:150px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer{
+      padding:40px 0;
+      text-align:center;
+      border-top:1px solid rgba(255,255,255,.05);
+      color:#64748b;
+    }
+
+    /* =========================
+       ANIMATIONS
+    ========================== */
+
+    @keyframes float{
+      0%{transform:translateY(0px)}
+      50%{transform:translateY(-15px)}
+      100%{transform:translateY(0px)}
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media(max-width:1000px){
+
+      .hero-content,
+      .contact-container{
+        grid-template-columns:1fr;
+      }
+
+      .hero-text{
+        text-align:center;
+      }
+
+      .buttons{
+        justify-content:center;
+      }
+
+      .hero-text h1{
+        font-size:4rem;
+      }
+    }
+
+    @media(max-width:768px){
+
+      .nav-links{
+        position:absolute;
+        top:100%;
+        left:0;
+        width:100%;
+        flex-direction:column;
+        background:#050816;
+        padding:30px;
+        display:none;
+      }
+
+      .nav-links.active{
+        display:flex;
+      }
+
+      .menu-btn{
+        display:block;
+      }
+
+      .hero-text h1{
+        font-size:3rem;
+      }
+
+      .section-title{
+        font-size:2.2rem;
+      }
+
+      .profile-image{
+        width:180px;
+        height:180px;
+      }
+
+      .about-box,
+      .contact-info,
+      .contact-form{
+        padding:30px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header>
+    <div class="container">
+
+      <nav>
+
+        <div class="logo">YS DEV</div>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="menu-btn" id="menuBtn">☰</div>
+
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="hero" id="home">
+
+    <div class="container hero-content">
+
+      <div class="hero-text">
+
+        <h3>FULL STACK DEVELOPER • AI ENGINEER • SOFTWARE ARCHITECT</h3>
+
+        <h1>
+          Suleiman <br>
+          <span>Yusuf</span>
+        </h1>
+
+        <p>
+          I build scalable SaaS systems, fintech applications, AI-powered platforms,
+          mobile apps, real-time systems, and modern software architectures.
+
+          Founder of <strong>YS DEV</strong>, focused on creating powerful digital products
+          using React, React Native, Node.js, MongoDB, TensorFlow, Socket.io, and C++.
+        </p>
+
+        <div class="buttons">
+          <a href="#projects" class="btn primary">View Projects</a>
+          <a href="#contact" class="btn secondary">Hire Me</a>
+        </div>
+
+      </div>
+
+      <div class="hero-right">
+
+        <div class="profile-card">
+
+          <div class="profile-image">
+
+            <!-- REPLACE THIS IMAGE -->
+            <img src="./man.jpeg">
+
+          </div>
+
+          <h2>YS DEV</h2>
+
+          <p>
+            Software Engineer & Founder
+          </p>
+
+          <div class="stats">
+
+            <div class="stat">
+              <h1>15+</h1>
+              <p>Projects</p>
+            </div>
+
+            <div class="stat">
+              <h1>20+</h1>
+              <p>Technologies</p>
+            </div>
+
+            <div class="stat">
+              <h1>24</h1>
+              <p>Age</p>
+            </div>
+
+            <div class="stat">
+              <h1>75%</h1>
+              <p>SaaS Complete</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- =========================
+       ABOUT
+  ========================== -->
+
+  <section id="about">
+
+    <div class="container">
+
+      <h1 class="section-title">
+        About <span>YS DEV</span>
+      </h1>
+
+      <p class="section-desc">
+        Building scalable digital products with modern technologies and advanced engineering.
+      </p>
+
+      <div class="about-box">
+
+        YS DEV is a software engineering brand created by Suleiman Yusuf,
+        focused on building scalable SaaS systems, fintech applications,
+        AI-powered software, POS systems, games, and real-world digital products.
+
+        <br><br>
+
+        I independently developed multiple systems including YSStore SaaS POS,
+        fintech platforms with payment integrations, VTU systems, facial recognition software,
+        and AI-powered biodiversity applications using TensorFlow and C++.
+
+        <br><br>
+
+        My development philosophy focuses on performance, scalability,
+        offline-first systems, modern UI/UX, real-time communication,
+        and clean software architecture.
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- =========================
+       SKILLS
+  ========================== -->
+
+  <section id="skills">
+
+    <div class="container">
+
+      <h1 class="section-title">
+        Skills & <span>Technologies</span>
+      </h1>
+
+      <p class="section-desc">
+        Technologies and tools I use to build scalable modern applications.
+      </p>
+
+      <div class="skills-grid">
+
+        <div class="skill-card">
+          <div class="skill-top">
+            <span>React Native</span>
+            <span>95%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" data-width="95%"></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-top">
+            <span>Node.js</span>
+            <span>92%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" data-width="92%"></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-top">
+            <span>MongoDB</span>
+            <span>90%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" data-width="90%"></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-top">
+            <span>React.js</span>
+            <span>90%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" data-width="90%"></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-top">
+            <span>C++</span>
+            <span>85%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" data-width="85%"></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-top">
+            <span>TensorFlow</span>
+            <span>80%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" data-width="80%"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- =========================
+       PROJECTS
+  ========================== -->
+
+<!-- =========================
+     REPLACE YOUR PROJECT SECTION
+     WITH THIS FULL ENHANCED VERSION
+========================== -->
+
+<section id="projects">
+
+  <div class="container">
+
+    <h1 class="section-title">
+      Featured <span>Projects</span>
+    </h1>
+
+    <p class="section-desc">
+      Real-world software systems, fintech applications, AI platforms,
+      games, SaaS products, and scalable architectures developed by YS DEV.
+    </p>
+
+    <div class="projects-grid">
+
+      <!-- PROJECT 1 -->
+
+      <div class="project-card"
+        data-title="YSStore SaaS & POS"
+        data-description="YSStore is a complete SaaS and POS ecosystem designed for supermarkets and retail businesses. The platform supports barcode scanning, receipt printing, offline MongoDB synchronization, worker management, delivery tracking, and multi-role authentication. Built with scalable backend architecture and offline-first principles."
+        data-tech="React Native • Node.js • MongoDB • Socket.io • Offline Sync">
+
+        <div class="project-top">YSStore</div>
+
+        <div class="project-content">
+
+          <h2>YSStore SaaS & POS</h2>
+
+          <p>
+            Complete POS and SaaS ecosystem for supermarkets with offline sync,
+            barcode scanning, receipt printing, workers management,
+            and real-time operations.
+          </p>
+
+          <div class="tags">
+            <span class="tag">React Native</span>
+            <span class="tag">MongoDB</span>
+            <span class="tag">Socket.io</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PROJECT 2 -->
+
+      <div class="project-card"
+        data-title="KS Bank Fintech"
+        data-description="KS Bank is a fintech platform focused on secure digital financial services. It includes wallet funding, transfers, virtual accounts, airtime purchases, bill payments, and secure payment gateway integrations such as Monnify, OPay, and VTpass APIs."
+        data-tech="Express.js • MongoDB • Fintech APIs • Virtual Accounts">
+
+        <div class="project-top">FINTECH</div>
+
+        <div class="project-content">
+
+          <h2>KS Bank Fintech</h2>
+
+          <p>
+            Banking and fintech platform with transfers,
+            virtual accounts, wallet funding,
+            VTU services, and API integrations.
+          </p>
+
+          <div class="tags">
+            <span class="tag">Express.js</span>
+            <span class="tag">Fintech</span>
+            <span class="tag">Payments</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PROJECT 3 -->
+
+      <div class="project-card"
+        data-title="YS Sub VTU Platform"
+        data-description="YS Sub is a VTU and subscription platform supporting airtime purchases, data subscriptions, electricity payments, cable TV subscriptions, and real-time transaction processing. Built with modern backend APIs and scalable architecture."
+        data-tech="React Native • VTpass • APIs • Node.js">
+
+        <div class="project-top">YS SUB</div>
+
+        <div class="project-content">
+
+          <h2>YS Sub VTU Platform</h2>
+
+          <p>
+            VTU and subscription application supporting airtime,
+            data, electricity payments, cable TV subscriptions,
+            and real-time transaction processing.
+          </p>
+
+          <div class="tags">
+            <span class="tag">React Native</span>
+            <span class="tag">VTpass</span>
+            <span class="tag">API</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PROJECT 4 -->
+
+      <div class="project-card"
+        data-title="Biodiversity AI"
+        data-description="An AI-powered biodiversity education platform capable of identifying species from uploaded images using TensorFlow and machine learning models. The project focuses on wildlife education and image classification systems."
+        data-tech="TensorFlow • AI • Machine Learning • C++">
+
+        <div class="project-top">AI SYSTEM</div>
+
+        <div class="project-content">
+
+          <h2>Biodiversity AI</h2>
+
+          <p>
+            AI-powered biodiversity recognition system
+            capable of identifying species from images using TensorFlow.
+          </p>
+
+          <div class="tags">
+            <span class="tag">TensorFlow</span>
+            <span class="tag">C++</span>
+            <span class="tag">Machine Learning</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PROJECT 5 -->
+
+      <div class="project-card"
+        data-title="Facial Recognition System"
+        data-description="A real-time facial recognition system developed using C++, OpenCV, and AI models. The system supports face detection, recognition, and camera processing with optimized performance."
+        data-tech="C++ • OpenCV • AI • Computer Vision">
+
+        <div class="project-top">FACE AI</div>
+
+        <div class="project-content">
+
+          <h2>Facial Recognition System</h2>
+
+          <p>
+            C++ facial recognition application using OpenCV
+            and AI models for real-time face detection.
+          </p>
+
+          <div class="tags">
+            <span class="tag">C++</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">AI</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PROJECT 6 -->
+
+      <div class="project-card"
+        data-title="Book Reading Application"
+        data-description="A modern mobile application for reading books online with categories, saved books, profiles, authentication, and responsive user experience."
+        data-tech="React Native • Firebase • Mobile UI">
+
+        <div class="project-top">BOOK APP</div>
+
+        <div class="project-content">
+
+          <h2>Book Reading App</h2>
+
+          <p>
+            Mobile application for reading books online
+            with modern UI, saved books,
+            categories, and user profiles.
+          </p>
+
+          <div class="tags">
+            <span class="tag">React Native</span>
+            <span class="tag">Firebase</span>
+            <span class="tag">UI/UX</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PROJECT 7 -->
+
+      <div class="project-card"
+        data-title="Mario Game Clone"
+        data-description="A platform-based Mario-inspired game featuring physics, animations, character movement, collisions, obstacles, and responsive gameplay mechanics."
+        data-tech="JavaScript • Game Development • Canvas">
+
+        <div class="project-top">MARIO</div>
+
+        <div class="project-content">
+
+          <h2>Mario Game Clone</h2>
+
+          <p>
+            Platform-based Mario-inspired game
+            with animations, physics,
+            movement, and gameplay systems.
+          </p>
+
+          <div class="tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Canvas</span>
+            <span class="tag">Game Dev</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PROJECT 8 -->
+
+      <div class="project-card"
+        data-title="Subway Runner Game"
+        data-description="An endless runner game inspired by Subway Surfers featuring obstacles, score tracking, smooth animations, and responsive controls."
+        data-tech="JavaScript • Animations • Canvas">
+
+        <div class="project-top">SUBWAY</div>
+
+        <div class="project-content">
+
+          <h2>Subway Runner Game</h2>
+
+          <p>
+            Endless runner game inspired by Subway Surfers
+            with score tracking, obstacles,
+            and smooth animations.
+          </p>
+
+          <div class="tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Animations</span>
+            <span class="tag">Game Development</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PROJECT 9 -->
+
+      <div class="project-card"
+        data-title="Family Support Platform"
+        data-description="A support and communication platform designed to connect families, manage assistance systems, and improve community communication using modern backend technologies."
+        data-tech="React • Node.js • MongoDB">
+
+        <div class="project-top">SUPPORT</div>
+
+        <div class="project-content">
+
+          <h2>Family Support Platform</h2>
+
+          <p>
+            Community support and assistance platform
+            designed to improve communication
+            and support systems.
+          </p>
+
+          <div class="tags">
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">MongoDB</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     MODAL
+========================== -->
+
+<div class="project-modal" id="projectModal">
+
+  <div class="modal-card">
+
+    <button class="close-modal" id="closeModal">✕</button>
+
+    <div class="modal-header">
+
+      <h1 id="modalTitle">Project Title</h1>
+
+      <p id="modalTech"></p>
+
+    </div>
+
+    <div class="modal-body">
+
+      <p id="modalDescription"></p>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <a href="#contact" class="btn primary">
+        Hire Me
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- =========================
+     ADD THIS CSS
+========================== -->
+
+
+<!-- =========================
+     ADD THIS JAVASCRIPT
+========================== -->
+
+
+
+  <!-- =========================
+       CONTACT
+  ========================== -->
+
+  <section id="contact">
+
+    <div class="container">
+
+      <h1 class="section-title">
+        Contact <span>Me</span>
+      </h1>
+
+      <p class="section-desc">
+        Let’s build scalable software and modern digital products together.
+      </p>
+
+      <div class="contact-container">
+
+        <div class="contact-info">
+
+          <h2>Get In Touch</h2>
+
+          <p>
+            Available for freelance projects, SaaS systems,
+            fintech applications, AI software,
+            mobile applications, and backend engineering.
+          </p>
+
+          <div class="contact-item">
+            <span>Email</span>
+            yourmail@gmail.com
+          </div>
+
+          <div class="contact-item">
+            <span>Location</span>
+            Abuja, Nigeria
+          </div>
+
+          <div class="contact-item">
+            <span>Brand</span>
+            YS DEV
+          </div>
+
+        </div>
+
+        <!-- EMAIL FORM -->
+
+        <form class="contact-form"
+          action="https://formsubmit.co/yourmail@gmail.com"
+          method="POST">
+
+          <h2>Send Message</h2>
+
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Your Name" required>
+          </div>
+
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Your Email" required>
+          </div>
+
+          <div class="form-group">
+            <textarea name="message" placeholder="Write your message..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn primary" style="width:100%">
+            Send Email
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="container">
+      <p>© 2026 Suleiman Yusuf • YS DEV • All Rights Reserved.</p>
+    </div>
+
+  </footer>
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    // MOBILE MENU
+
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click',()=>{
+      navLinks.classList.toggle('active');
+    });
+
+    // SKILL PROGRESS BAR ANIMATION
+
+    const bars = document.querySelectorAll('.progress-bar');
+
+    const observer = new IntersectionObserver(entries => {
+
+      entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+          const bar = entry.target;
+          bar.style.width = bar.dataset.width;
+
+        }
+
+      });
+
+    }, {threshold:0.4});
+
+    bars.forEach(bar => {
+      observer.observe(bar);
+    });
+
+
+  const modal = document.getElementById('projectModal');
+  const closeModal = document.getElementById('closeModal');
+
+  const modalTitle = document.getElementById('modalTitle');
+  const modalTech = document.getElementById('modalTech');
+  const modalDescription = document.getElementById('modalDescription');
+
+  const cards = document.querySelectorAll('.project-card');
+
+  cards.forEach(card => {
+
+    card.addEventListener('click', () => {
+
+      modal.classList.add('active');
+
+      modalTitle.textContent = card.dataset.title;
+      modalTech.textContent = card.dataset.tech;
+      modalDescription.textContent = card.dataset.description;
+
+      document.body.style.overflow = 'hidden';
+
+    });
+
+  });
+
+  closeModal.addEventListener('click', () => {
+
+    modal.classList.remove('active');
+
+    document.body.style.overflow = 'auto';
+
+  });
+
+  modal.addEventListener('click', (e) => {
+
+    if(e.target === modal){
+
+      modal.classList.remove('active');
+
+      document.body.style.overflow = 'auto';
+
+    }
+
+  });
+
+
+  </script>
+
+</body>
+</html>
