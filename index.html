@@ -3,1520 +3,1395 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>YS DEV | Suleiman Yusuf Portfolio</title>
+  <title>Suleiman Yusuf — Full Stack & AI Engineer</title>
+  <meta name="description" content="Suleiman Yusuf — Full Stack Developer, AI Engineer & Software Architect. Building scalable SaaS, fintech, and AI systems.">
   <link rel="icon" type="image/x-icon" href="./test.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet"> -->
 
   <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      --bg: #04070f;
+      --surface: #080e1e;
+      --card: #0b1223;
+      --border: rgba(255,255,255,0.06);
+      --border-hover: rgba(96,165,250,0.4);
+      --blue: #3b82f6;
+      --cyan: #06b6d4;
+      --blue-dim: rgba(59,130,246,0.12);
+      --text: #f1f5f9;
+      --muted: #64748b;
+      --soft: #94a3b8;
+      --accent-glow: rgba(59,130,246,0.25);
+      --radius: 20px;
+      --radius-lg: 28px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::-webkit-scrollbar { width: 4px; }
+    body::-webkit-scrollbar-thumb {
+      background: linear-gradient(var(--blue), var(--cyan));
+      border-radius: 20px;
+    }
+
+    /* ── UTILITY ── */
+    .container { width: 90%; max-width: 1200px; margin: auto; }
+    .grad { background: linear-gradient(135deg, var(--blue), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .tag { padding: 6px 14px; background: var(--blue-dim); border: 1px solid rgba(59,130,246,0.2); border-radius: 50px; font-size: .78rem; font-weight: 600; color: #93c5fd; letter-spacing: .3px; }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: .4;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed; top: 0; width: 100%; z-index: 999;
+      background: rgba(4,7,15,0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 0;
+    }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: var(--soft); text-decoration: none;
+      font-size: .9rem; font-weight: 500;
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      padding: 10px 22px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: white !important;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: opacity .25s, transform .25s !important;
+    }
+    .nav-cta:hover { opacity: .85; transform: translateY(-1px) !important; }
+
+    .menu-btn { display: none; font-size: 1.8rem; cursor: pointer; color: var(--text); border: none; background: none; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-blob {
+      position: absolute;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+      top: -200px; right: -200px;
+      pointer-events: none;
+    }
+    .hero-bg-blob2 {
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(6,182,212,0.07) 0%, transparent 70%);
+      bottom: -100px; left: -100px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 80px;
+      align-items: center;
+      position: relative; z-index: 1;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--blue-dim);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: .8rem; font-weight: 600;
+      color: #93c5fd;
+      letter-spacing: .5px;
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); display: inline-block; animation: pulse 2s ease-in-out infinite; }
+
+    @keyframes pulse { 0%,100% { opacity:1; transform: scale(1); } 50% { opacity:.4; transform: scale(1.4); } }
+
+    .hero-name {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -2px;
+      margin-bottom: 8px;
+    }
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      scroll-behavior:smooth;
-    }
-
-    :root{
-      --bg:#050816;
-      --card:#0f172a;
-      --primary:#3b82f6;
-      --secondary:#06b6d4;
-      --text:#ffffff;
-      --gray:#94a3b8;
-      --border:rgba(255,255,255,.08);
-    }
-
-    body{
-      font-family:'Inter',sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      overflow-x:hidden;
-    }
-
-    body::-webkit-scrollbar{
-      width:10px;
-    }
-
-    body::-webkit-scrollbar-thumb{
-      background:linear-gradient(var(--primary),var(--secondary));
-      border-radius:20px;
-    }
-
-    .container{
-      width:90%;
-      max-width:1300px;
-      margin:auto;
-    }
-
-    /* =========================
-       HEADER
-    ========================== */
-
-    
-  .project-card{
-    cursor:pointer;
-  }
-
-  .project-modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.7);
-    backdrop-filter:blur(10px);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:9999;
-    opacity:0;
-    visibility:hidden;
-    transition:.4s;
-    padding:20px;
-  }
-
-  .project-modal.active{
-    opacity:1;
-    visibility:visible;
-  }
-
-  .modal-card{
-    width:100%;
-    max-width:750px;
-    background:linear-gradient(145deg,#0f172a,#020617);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:35px;
-    padding:45px;
-    position:relative;
-    transform:translateY(40px) scale(.9);
-    transition:.4s;
-    box-shadow:0 30px 100px rgba(37,99,235,.25);
-  }
-
-  .project-modal.active .modal-card{
-    transform:translateY(0) scale(1);
-  }
-
-  .close-modal{
-    position:absolute;
-    top:20px;
-    right:20px;
-    width:45px;
-    height:45px;
-    border:none;
-    border-radius:50%;
-    background:rgba(255,255,255,.08);
-    color:white;
-    cursor:pointer;
-    font-size:1.2rem;
-    transition:.3s;
-  }
-
-  .close-modal:hover{
-    background:#2563eb;
-    transform:rotate(90deg);
-  }
-
-  .modal-header h1{
-    font-size:2.5rem;
-    margin-bottom:15px;
-    background:linear-gradient(to right,#3b82f6,#06b6d4);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-  }
-
-  .modal-header p{
-    color:#60a5fa;
-    font-weight:600;
-    margin-bottom:30px;
-  }
-
-  .modal-body p{
-    color:#cbd5e1;
-    line-height:2;
-    font-size:1.05rem;
-  }
-
-  .modal-footer{
-    margin-top:40px;
-  }
-
-  @media(max-width:768px){
-
-    .modal-card{
-      padding:30px;
+    .hero-name .line2 {
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
 
-    .modal-header h1{
-      font-size:2rem;
+    .hero-role {
+      font-size: 1.1rem;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 28px;
+      letter-spacing: .2px;
     }
-
-  }
-
 
-    header{
-      position:fixed;
-      top:0;
-      width:100%;
-      z-index:999;
-      background:rgba(5,8,22,.75);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid rgba(255,255,255,.05);
+    .hero-desc {
+      color: var(--soft);
+      line-height: 1.85;
+      font-size: 1rem;
+      max-width: 520px;
+      margin-bottom: 40px;
     }
 
-    nav{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:20px 0;
-    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
 
-    .logo{
-      font-size:1.5rem;
-      font-weight:900;
-      background:linear-gradient(to right,#3b82f6,#06b6d4);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-family: inherit;
+      font-weight: 600; font-size: .95rem;
+      text-decoration: none;
+      border: none; cursor: pointer;
+      transition: all .3s;
     }
 
-    .nav-links{
-      display:flex;
-      gap:30px;
-      list-style:none;
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: white;
+      box-shadow: 0 8px 30px rgba(59,130,246,0.35);
     }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(59,130,246,0.45); }
 
-    .nav-links a{
-      color:white;
-      text-decoration:none;
-      transition:.3s;
-      font-weight:600;
-      position:relative;
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border-hover);
+      color: var(--text);
     }
+    .btn-outline:hover { background: var(--blue-dim); border-color: var(--blue); }
 
-    .nav-links a::after{
-      content:'';
-      position:absolute;
-      width:0%;
-      height:2px;
-      left:0;
-      bottom:-5px;
-      background:linear-gradient(to right,#3b82f6,#06b6d4);
-      transition:.3s;
+    .btn-ghost {
+      background: transparent; color: var(--soft);
+      padding: 14px 0;
+      font-size: .9rem;
     }
+    .btn-ghost:hover { color: var(--text); }
+    .btn-ghost svg { transition: transform .3s; }
+    .btn-ghost:hover svg { transform: translateX(4px); }
 
-    .nav-links a:hover::after{
-      width:100%;
+    /* Profile card */
+    .profile-card {
+      width: 320px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: float 6s ease-in-out infinite;
+      flex-shrink: 0;
     }
 
-    .menu-btn{
-      display:none;
-      font-size:2rem;
-      cursor:pointer;
+    .profile-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, transparent 60%);
+      pointer-events: none;
     }
 
-    /* =========================
-       HERO SECTION
-    ========================== */
+    @keyframes float { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-12px) } }
 
-    .hero{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      position:relative;
-      overflow:hidden;
-      padding-top:120px;
+    .avatar-ring {
+      width: 210px; height: 210px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
     }
 
-    .hero::before{
-      content:'';
-      position:absolute;
-      width:500px;
-      height:500px;
-      background:#2563eb;
-      filter:blur(180px);
-      opacity:.25;
-      top:-120px;
-      right:-100px;
+    .avatar-inner {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--surface);
     }
 
-    .hero-content{
-      display:grid;
-      grid-template-columns:1.2fr 1fr;
-      gap:60px;
-      align-items:center;
+    .avatar-inner img {
+      width: 100%; height: 100%; object-fit: cover;
     }
 
-    .hero-text h3{
-      color:#60a5fa;
-      margin-bottom:20px;
-      font-size:1rem;
-      letter-spacing:1px;
+    .profile-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem; margin-bottom: 6px;
     }
 
-    .hero-text h1{
-      font-size:5rem;
-      line-height:1;
-      font-weight:900;
-      margin-bottom:25px;
+    .profile-card .role-text {
+      font-size: .82rem; color: var(--muted);
+      margin-bottom: 24px;
     }
 
-    .hero-text h1 span{
-      background:linear-gradient(to right,#3b82f6,#06b6d4);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
+    .stats-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
 
-    .hero-text p{
-      color:var(--gray);
-      line-height:1.9;
-      margin-bottom:35px;
-      font-size:1.05rem;
+    .stat-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 10px;
     }
 
-    .buttons{
-      display:flex;
-      gap:20px;
-      flex-wrap:wrap;
+    .stat-box .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
 
-    .btn{
-      padding:16px 34px;
-      border-radius:16px;
-      font-weight:700;
-      text-decoration:none;
-      transition:.4s;
-      border:none;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-    }
+    .stat-box .stat-label { font-size: .72rem; color: var(--muted); margin-top: 2px; font-weight: 500; }
 
-    .primary{
-      background:linear-gradient(to right,#2563eb,#06b6d4);
-      color:white;
-      box-shadow:0 10px 30px rgba(37,99,235,.35);
+    .available-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.25);
+      border-radius: 50px; padding: 6px 14px;
+      font-size: .75rem; color: #86efac; font-weight: 600;
+      margin-top: 18px;
     }
+    .available-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
 
-    .primary:hover{
-      transform:translateY(-5px);
+    /* ── SECTION BASE ── */
+    section { padding: 100px 0; position: relative; z-index: 1; }
+
+    .section-label {
+      font-size: .75rem; font-weight: 700; letter-spacing: 2px;
+      color: var(--blue); text-transform: uppercase; margin-bottom: 12px;
     }
 
-    .secondary{
-      border:1px solid rgba(255,255,255,.15);
-      color:white;
-      background:transparent;
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
     }
 
-    .secondary:hover{
-      background:rgba(255,255,255,.05);
-      border-color:#3b82f6;
+    .section-sub {
+      color: var(--soft); line-height: 1.8; max-width: 580px;
+      font-size: .97rem;
     }
 
-    /* =========================
-       PROFILE CARD
-    ========================== */
+    .section-header { margin-bottom: 60px; }
+    .section-header.centered { text-align: center; }
+    .section-header.centered .section-sub { margin: 0 auto; }
 
-    .hero-right{
-      position:relative;
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
     }
 
-    .profile-card{
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:35px;
-      padding:35px;
-      backdrop-filter:blur(14px);
-      position:relative;
-      overflow:hidden;
-      animation:float 5s ease-in-out infinite;
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: start;
     }
 
-    .profile-card::before{
-      content:'';
-      position:absolute;
-      width:300px;
-      height:300px;
-      background:rgba(37,99,235,.18);
-      border-radius:50%;
-      top:-120px;
-      right:-120px;
-      filter:blur(40px);
-    }
+    .about-text { color: var(--soft); line-height: 1.9; font-size: 1rem; }
+    .about-text p + p { margin-top: 18px; }
+    .about-text strong { color: var(--text); font-weight: 600; }
 
-    .profile-image{
-      width:220px;
-      height:220px;
-      margin:auto;
-      border-radius:50%;
-      overflow:hidden;
-      border:5px solid rgba(59,130,246,.4);
-      box-shadow:0 0 40px rgba(37,99,235,.4);
-      margin-bottom:30px;
-    }
+    .about-aside { display: flex; flex-direction: column; gap: 16px; }
 
-    .profile-image img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
+    .about-chip {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 18px 20px;
+      transition: border-color .3s;
     }
+    .about-chip:hover { border-color: rgba(59,130,246,0.35); }
 
-    .profile-card h2{
-      text-align:center;
-      margin-bottom:10px;
-      font-size:2rem;
+    .about-chip .chip-icon {
+      width: 40px; height: 40px; border-radius: 12px;
+      background: var(--blue-dim);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
     }
 
-    .profile-card p{
-      text-align:center;
-      color:var(--gray);
-      margin-bottom:30px;
-    }
+    .about-chip .chip-label { font-size: .8rem; color: var(--muted); margin-bottom: 2px; }
+    .about-chip .chip-value { font-weight: 600; font-size: .95rem; }
 
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:15px;
+    /* ── SKILLS ── */
+    .skills-section { background: var(--surface); }
+
+    .skills-outer {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start;
     }
+
+    .skill-item { margin-bottom: 28px; }
+    .skill-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .skill-name { font-weight: 600; font-size: .95rem; }
+    .skill-pct { font-size: .82rem; color: var(--muted); font-weight: 600; }
 
-    .stat{
-      background:rgba(255,255,255,.04);
-      padding:20px;
-      border-radius:18px;
-      text-align:center;
-      border:1px solid rgba(255,255,255,.05);
+    .progress-track {
+      width: 100%; height: 5px;
+      background: rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden;
     }
 
-    .stat h1{
-      color:#60a5fa;
-      margin-bottom:5px;
+    .progress-fill {
+      height: 100%; border-radius: 10px;
+      background: linear-gradient(to right, var(--blue), var(--cyan));
+      width: 0; transition: width 1.6s cubic-bezier(.4,0,.2,1);
     }
 
-    /* =========================
-       GENERAL
-    ========================== */
+    .tech-cloud { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tech-pill {
+      padding: 8px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: .82rem; font-weight: 500; color: var(--soft);
+      transition: all .25s;
+    }
+    .tech-pill:hover {
+      border-color: var(--blue); color: #93c5fd;
+      background: var(--blue-dim);
+    }
 
-    section{
-      padding:110px 0;
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(330px,1fr));
+      gap: 24px;
     }
 
-    .section-title{
-      font-size:3rem;
-      margin-bottom:20px;
-      font-weight:900;
-      text-align:center;
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .35s, border-color .35s, box-shadow .35s;
+      display: flex; flex-direction: column;
     }
 
-    .section-title span{
-      background:linear-gradient(to right,#3b82f6,#06b6d4);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(59,130,246,0.4);
+      box-shadow: 0 20px 60px rgba(59,130,246,0.12);
     }
 
-    .yS{
-      background:linear-gradient(to right,#3b82f6,#06b6d4);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
+    .project-banner {
+      height: 140px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px;
     }
 
-    .section-desc{
-      max-width:850px;
-      margin:auto;
-      text-align:center;
-      color:var(--gray);
-      line-height:1.9;
-      margin-bottom:70px;
+    .project-banner::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(11,18,35,0.8));
     }
 
-    /* =========================
-       ABOUT
-    ========================== */
+    .project-content { padding: 24px; flex: 1; display: flex; flex-direction: column; }
 
-    .about-box{
-      background:linear-gradient(145deg,#0f172a,#020617);
-      border:1px solid rgba(255,255,255,.06);
-      padding:50px;
-      border-radius:35px;
-      line-height:2;
-      color:#cbd5e1;
-      font-size:1.05rem;
+    .project-type {
+      font-size: .72rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
     }
 
-    /* =========================
-       SKILLS
-    ========================== */
+    .project-content h3 { font-family: 'Syne', sans-serif; font-size: 1.15rem; margin-bottom: 10px; font-weight: 700; }
+    .project-content p { color: var(--soft); font-size: .88rem; line-height: 1.75; margin-bottom: 20px; flex: 1; }
 
-    .skills-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:25px;
-    }
+    .project-footer { display: flex; justify-content: space-between; align-items: center; }
+    .project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
 
-    .skill-card{
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.05);
-      border-radius:24px;
-      padding:25px;
-      transition:.4s;
+    .project-arrow {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); flex-shrink: 0;
+      transition: all .25s;
     }
 
-    .skill-card:hover{
-      transform:translateY(-10px);
-      border-color:#3b82f6;
-      box-shadow:0 20px 50px rgba(37,99,235,.15);
+    .project-card:hover .project-arrow {
+      border-color: var(--blue); color: var(--blue);
+      background: var(--blue-dim);
     }
 
-    .skill-top{
-      display:flex;
-      justify-content:space-between;
-      margin-bottom:18px;
-      font-weight:700;
-    }
+    /* Project banner colors */
+    .banner-saas { background: linear-gradient(135deg, #1e3a8a, #0e7490); }
+    .banner-fintech { background: linear-gradient(135deg, #064e3b, #065f46); }
+    .banner-vtu { background: linear-gradient(135deg, #312e81, #1e1b4b); }
+    .banner-ai { background: linear-gradient(135deg, #4c1d95, #6d28d9); }
+    .banner-cv { background: linear-gradient(135deg, #701a75, #86198f); }
+    .banner-book { background: linear-gradient(135deg, #7c2d12, #92400e); }
+    .banner-game { background: linear-gradient(135deg, #1c3d5a, #0c4a6e); }
+    .banner-game2 { background: linear-gradient(135deg, #14532d, #166534); }
+    .banner-social { background: linear-gradient(135deg, #1e1b4b, #312e81); }
 
-    .progress{
-      width:100%;
-      height:12px;
-      background:rgba(255,255,255,.08);
-      border-radius:30px;
-      overflow:hidden;
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(4,7,15,0.85);
+      backdrop-filter: blur(16px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      opacity: 0; visibility: hidden; transition: all .35s;
     }
 
-    .progress-bar{
-      height:100%;
-      border-radius:30px;
-      background:linear-gradient(to right,#3b82f6,#06b6d4);
-      width:0;
-      transition:2s ease;
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+
+    .modal-box {
+      width: 100%; max-width: 680px;
+      background: var(--card);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: var(--radius-lg);
+      padding: 44px;
+      transform: translateY(20px) scale(.97);
+      transition: all .35s;
+      position: relative;
     }
 
-    /* =========================
-       PROJECTS
-    ========================== */
+    .modal-overlay.open .modal-box { transform: translateY(0) scale(1); }
 
-    .projects-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
-      gap:30px;
+    .modal-close {
+      position: absolute; top: 18px; right: 18px;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      color: var(--soft); cursor: pointer; font-size: 1.1rem;
+      transition: all .25s; display: flex; align-items: center; justify-content: center;
     }
+    .modal-close:hover { background: rgba(59,130,246,0.15); color: var(--text); transform: rotate(90deg); }
 
-    .project-card{
-      background:linear-gradient(145deg,#0f172a,#020617);
-      border-radius:30px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.06);
-      transition:.5s;
-      position:relative;
-    }
+    .modal-type { font-size: .72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+    .modal-title { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+    .modal-tech { color: var(--soft); font-size: .85rem; margin-bottom: 28px; }
 
-    .project-card:hover{
-      transform:translateY(-12px);
-      border-color:#3b82f6;
-      box-shadow:0 25px 70px rgba(37,99,235,.2);
-    }
+    .modal-divider { height: 1px; background: var(--border); margin-bottom: 28px; }
 
-    .project-top{
-      height:220px;
-      background:linear-gradient(to right,#2563eb,#06b6d4);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:2rem;
-      font-weight:900;
-      position:relative;
-      overflow:hidden;
-    }
+    .modal-desc { color: var(--soft); line-height: 1.9; font-size: .97rem; margin-bottom: 32px; }
 
-    .project-top::before{
-      content:'';
-      position:absolute;
-      width:120%;
-      height:120%;
-      background:rgba(255,255,255,.12);
-      transform:rotate(25deg);
-      left:-140%;
-      transition:1s;
-    }
+    .modal-actions { display: flex; gap: 12px; }
 
-    .project-card:hover .project-top::before{
-      left:120%;
+    /* ── EXPERIENCE ── */
+    .exp-timeline { position: relative; padding-left: 32px; }
+    .exp-timeline::before {
+      content: ''; position: absolute; left: 6px; top: 0; bottom: 0;
+      width: 1px; background: var(--border);
     }
 
-    .project-content{
-      padding:30px;
+    .exp-item { position: relative; margin-bottom: 40px; }
+    .exp-item::before {
+      content: ''; position: absolute; left: -26px; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
     }
 
-    .project-content h2{
-      margin-bottom:15px;
-      font-size:1.6rem;
-    }
+    .exp-period { font-size: .78rem; color: var(--muted); font-weight: 600; letter-spacing: .5px; margin-bottom: 6px; }
+    .exp-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+    .exp-org { font-size: .88rem; color: var(--blue); font-weight: 600; margin-bottom: 10px; }
+    .exp-desc { color: var(--soft); font-size: .9rem; line-height: 1.8; }
 
-    .project-content p{
-      color:var(--gray);
-      line-height:1.8;
-      margin-bottom:25px;
-    }
+    /* ── SOCIAL ── */
+    .social-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
 
-    .tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
+    .social-card {
+      display: flex; align-items: center; gap: 18px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 22px;
+      text-decoration: none; color: var(--text);
+      transition: all .3s;
     }
+    .social-card:hover { border-color: rgba(59,130,246,0.4); transform: translateY(-4px); background: rgba(59,130,246,0.04); }
 
-    .tag{
-      padding:9px 14px;
-      background:rgba(255,255,255,.05);
-      border-radius:30px;
-      font-size:.85rem;
-      border:1px solid rgba(255,255,255,.06);
+    .social-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: var(--blue-dim);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+      border: 1px solid rgba(59,130,246,0.15);
     }
 
-    /* =========================
-       CONTACT
-    ========================== */
+    .social-info .social-name { font-weight: 700; font-size: 1rem; margin-bottom: 3px; }
+    .social-info .social-desc { font-size: .82rem; color: var(--muted); }
 
-    .contact-container{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:40px;
-    }
+    .social-arrow { margin-left: auto; color: var(--muted); transition: transform .25s; }
+    .social-card:hover .social-arrow { transform: translateX(4px); color: var(--blue); }
 
-    .contact-info,
-    .contact-form{
-      background:linear-gradient(145deg,#0f172a,#020617);
-      padding:40px;
-      border-radius:30px;
-      border:1px solid rgba(255,255,255,.06);
-    }
+    /* ── CONTACT ── */
+    .contact-section { background: var(--surface); }
 
-    .contact-info h2,
-    .contact-form h2{
-      margin-bottom:20px;
-      font-size:2rem;
+    .contact-wrap {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: start;
     }
 
-    .contact-info p{
-      color:var(--gray);
-      line-height:1.8;
-      margin-bottom:30px;
-    }
+    .contact-info-side { }
 
-    .contact-item{
-      margin-bottom:20px;
+    .contact-detail {
+      display: flex; align-items: flex-start; gap: 14px;
+      margin-bottom: 24px;
     }
 
-    .contact-item span{
-      display:block;
-      color:#60a5fa;
-      margin-bottom:5px;
-      font-weight:700;
+    .contact-detail .cd-icon {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: var(--blue-dim); border: 1px solid rgba(59,130,246,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
     }
 
-    .form-group{
-      margin-bottom:20px;
+    .contact-detail .cd-label { font-size: .75rem; color: var(--muted); font-weight: 600; margin-bottom: 3px; letter-spacing: .5px; text-transform: uppercase; }
+    .contact-detail .cd-value { font-weight: 600; font-size: .95rem; color: var(--text); }
+    .contact-detail a.cd-value { color: var(--blue); text-decoration: none; }
+    .contact-detail a.cd-value:hover { text-decoration: underline; }
+
+    .contact-form-box {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 40px;
     }
+
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: .82rem; font-weight: 600; color: var(--soft); margin-bottom: 8px; letter-spacing: .3px; }
 
     .form-group input,
-    .form-group textarea{
-      width:100%;
-      padding:16px;
-      border:none;
-      outline:none;
-      border-radius:16px;
-      background:rgba(255,255,255,.04);
-      color:white;
-      border:1px solid rgba(255,255,255,.05);
-      font-family:inherit;
+    .form-group textarea,
+    .form-group select {
+      width: 100%; padding: 14px 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      color: var(--text);
+      font-family: inherit; font-size: .95rem;
+      outline: none; transition: border-color .25s;
     }
 
-    .form-group textarea{
-      resize:none;
-      height:150px;
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--blue);
+      background: rgba(59,130,246,0.04);
     }
 
-    /* =========================
-       FOOTER
-    ========================== */
+    .form-group textarea { resize: none; height: 140px; }
 
-    footer{
-      padding:40px 0;
-      text-align:center;
-      border-top:1px solid rgba(255,255,255,.05);
-      color:#64748b;
+    .form-group select option { background: #0b1223; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 36px 0;
+      border-top: 1px solid var(--border);
     }
 
-    /* =========================
-       ANIMATIONS
-    ========================== */
-
-    @keyframes float{
-      0%{transform:translateY(0px)}
-      50%{transform:translateY(-15px)}
-      100%{transform:translateY(0px)}
+    .footer-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
     }
 
-    /* =========================
-       RESPONSIVE
-    ========================== */
+    .footer-copy { color: var(--muted); font-size: .85rem; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: .85rem; transition: color .25s; }
+    .footer-links a:hover { color: var(--text); }
 
-    @media(max-width:1000px){
-
-      .hero-content,
-      .contact-container{
-        grid-template-columns:1fr;
-      }
-
-      .hero-text{
-        text-align:center;
-      }
-
-      .buttons{
-        justify-content:center;
-      }
-
-      .hero-text h1{
-        font-size:4rem;
-      }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1000px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 50px; }
+      .profile-card { width: 100%; max-width: 380px; margin: 0 auto; }
+      .about-grid { grid-template-columns: 1fr; }
+      .skills-outer { grid-template-columns: 1fr; }
+      .contact-wrap { grid-template-columns: 1fr; }
     }
 
-    @media(max-width:768px){
-
-      .nav-links{
-        position:absolute;
-        top:100%;
-        left:0;
-        width:100%;
-        flex-direction:column;
-        background:#050816;
-        padding:30px;
-        display:none;
+    @media (max-width: 768px) {
+      .nav-links {
+        position: absolute; top: 100%; left: 0; width: 100%;
+        flex-direction: column; background: rgba(4,7,15,0.97);
+        padding: 24px; display: none; border-bottom: 1px solid var(--border);
+        gap: 18px;
       }
-
-      .nav-links.active{
-        display:flex;
-      }
-
-      .menu-btn{
-        display:block;
-      }
-
-      .hero-text h1{
-        font-size:3rem;
-      }
-
-      .section-title{
-        font-size:2.2rem;
-      }
-
-      .profile-image{
-        width:180px;
-        height:180px;
-      }
-      a:active{
-        color: white;
-      }
-
-      .about-box,
-      .contact-info,
-      .contact-form{
-        padding:30px;
-      }
+      .nav-links.open { display: flex; }
+      .nav-cta { display: none; }
+      .menu-btn { display: block; }
+      .hero-name { letter-spacing: -1px; }
+      .modal-box { padding: 28px 24px; }
+      .contact-form-box { padding: 24px; }
     }
 
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
   </style>
 </head>
-
 <body>
 
-  <!-- =========================
-       HEADER
-  ========================== -->
-
-  <header>
-    <div class="container">
-
-      <nav>
-
-        <div class="logo">YS DEV</div>
-
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#social">Social</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-
-        <div class="menu-btn" id="menuBtn">☰</div>
-
-      </nav>
-
-    </div>
-  </header>
-
-  <!-- =========================
-       HERO
-  ========================== -->
-
-  <section class="hero" id="home">
-
-    <div class="container hero-content">
-
-      <div class="hero-text">
-
-        <h3>FULL STACK DEVELOPER • AI ENGINEER • SOFTWARE ARCHITECT</h3>
-
-        <h1>
-          Suleiman <br>
-          <span>Yusuf</span>
-        </h1>
-
-        <p>
-          I build scalable SaaS systems, fintech applications, AI-powered platforms,
-          mobile apps, real-time systems, and modern software architectures.
-
-          Founder of <strong>YS DEV</strong>, focused on creating powerful digital products
-          using React, React Native, Node.js, MongoDB, TensorFlow, Socket.io, and C++.
-        </p>
-
-        <div class="buttons">
-          <a href="#projects" class="btn primary">View Projects</a>
-          <a href="#contact" class="btn secondary">Hire Me</a>
-        </div>
-
-      </div>
-
-      <div class="hero-right">
-
-        <div class="profile-card">
-
-          <div class="profile-image">
-
-            <!-- REPLACE THIS IMAGE -->
-            <img src="./test.png">
-<!-- sihuebin -->
-          </div>
-
-          <h2>YS DEV</h2>
-
-          <p>
-            Software Engineer & Founder
-          </p>
-
-          <div class="stats">
-
-            <div class="stat">
-              <h1>15+</h1>
-              <p>Projects</p>
-            </div>
-
-            <div class="stat">
-              <h1>20+</h1>
-              <p>Technologies</p>
-            </div>
-
-            <div class="stat">
-              <h1>24</h1>
-              <p>Age</p>
-            </div>
-
-            <div class="stat">
-              <h1>75%</h1>
-              <p>SaaS Complete</p>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- =========================
-       ABOUT
-  ========================== -->
-
-  <section id="about">
-
-    <div class="container">
-
-      <h1 class="section-title">
-        About <span>YS DEV</span>
-      </h1>
-
-      <p class="section-desc">
-        Building scalable digital products with modern technologies and advanced engineering.
-      </p>
-
-      <div class="about-box">
-
-        YS DEV is a software engineering brand created by Suleiman Yusuf,
-        focused on building scalable SaaS systems, fintech applications,
-        AI-powered software, POS systems, games, and real-world digital products.
-
-        <br><br>
-
-        I independently developed multiple systems including YSStore SaaS POS,
-        fintech platforms with payment integrations, VTU systems, facial recognition software,
-        and AI-powered biodiversity applications using TensorFlow and C++.
-
-        <br><br>
-
-        My development philosophy focuses on performance, scalability,
-        offline-first systems, modern UI/UX, real-time communication,
-        and clean software architecture.
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- =========================
-       SKILLS
-  ========================== -->
-
-  <section id="skills">
-
-    <div class="container">
-
-      <h1 class="section-title">
-        Skills & <span>Technologies</span>
-      </h1>
-
-      <p class="section-desc">
-        Technologies and tools I use to build scalable modern applications.
-      </p>
-
-      <div class="skills-grid">
-
-        <div class="skill-card">
-          <div class="skill-top">
-            <span>React Native</span>
-            <span>95%</span>
-          </div>
-          <div class="progress">
-            <div class="progress-bar" data-width="95%"></div>
-          </div>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-top">
-            <span>Node.js</span>
-            <span>92%</span>
-          </div>
-          <div class="progress">
-            <div class="progress-bar" data-width="92%"></div>
-          </div>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-top">
-            <span>MongoDB</span>
-            <span>90%</span>
-          </div>
-          <div class="progress">
-            <div class="progress-bar" data-width="90%"></div>
-          </div>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-top">
-            <span>React.js</span>
-            <span>90%</span>
-          </div>
-          <div class="progress">
-            <div class="progress-bar" data-width="90%"></div>
-          </div>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-top">
-            <span>C++</span>
-            <span>85%</span>
-          </div>
-          <div class="progress">
-            <div class="progress-bar" data-width="85%"></div>
-          </div>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-top">
-            <span>TensorFlow</span>
-            <span>80%</span>
-          </div>
-          <div class="progress">
-            <div class="progress-bar" data-width="80%"></div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- =========================
-       PROJECTS
-  ========================== -->
-
-<!-- =========================
-     REPLACE YOUR PROJECT SECTION
-     WITH THIS FULL ENHANCED VERSION
-========================== -->
-
-<section id="projects">
-
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header>
   <div class="container">
+    <nav>
+      <div class="logo">YS DEV</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+      </ul>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+    </nav>
+  </div>
+</header>
 
-    <h1 class="section-title">
-      Featured <span>Projects</span>
-    </h1>
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="home">
+  <div class="hero-bg-blob"></div>
+  <div class="hero-bg-blob2"></div>
+  <div class="container hero-inner">
 
-    <p class="section-desc">
-      Real-world software systems, fintech applications, AI platforms,
-      games, SaaS products, and scalable architectures developed by YS DEV.
-    </p>
+    <div class="hero-text fade-in">
+      <div class="hero-eyebrow">
+        <span></span>
+        Available for new projects
+      </div>
+
+      <h1 class="hero-name">
+        Suleiman<br>
+        <span class="line2">Yusuf</span>
+      </h1>
+
+      <p class="hero-role">Full Stack Developer · AI Engineer · Software Architect</p>
+
+      <p class="hero-desc">
+        I build scalable SaaS systems, fintech platforms, AI-powered software, and mobile applications.
+        Founder of <strong style="color:var(--text)">YS DEV</strong> — focused on clean architecture,
+        real-time systems, and products that work in the real world.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          View Projects
+        </a>
+        <a href="#contact" class="btn btn-outline">Hire Me</a>
+        <a href="#" class="btn btn-ghost" onclick="alert('Add your CV PDF link here'); return false;">
+          Download CV
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="fade-in" style="transition-delay:.15s">
+      <div class="profile-card">
+        <div class="avatar-ring">
+          <div class="avatar-inner">
+            <img src="./man.png" alt="Suleiman Yusuf">
+          </div>
+        </div>
+        <h3>Suleiman Yusuf</h3>
+        <p class="role-text">Founder, YS DEV · Software Engineer</p>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-num">15+</div>
+            <div class="stat-label">Projects Built</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">20+</div>
+            <div class="stat-label">Technologies</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">4+</div>
+            <div class="stat-label">Years Coding</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Domains: SaaS · AI · Fintech</div>
+          </div>
+        </div>
+
+        <div class="available-badge">
+          <span class="dot"></span> Open to Opportunities
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="fade-in">
+        <div class="section-header">
+          <p class="section-label">About</p>
+          <h2 class="section-title">Building software that<br><span class="grad">actually ships</span></h2>
+        </div>
+        <div class="about-text">
+          <p>
+            I'm Suleiman Yusuf, a self-driven software engineer from Katsina, Nigeria.
+            I created <strong>YS DEV</strong> as a brand for building real-world digital products —
+            systems that are fast, scalable, and offline-capable.
+          </p>
+          <p>
+            My work spans the full spectrum: from <strong>SaaS POS systems</strong> for supermarkets,
+            to <strong>fintech platforms</strong> with wallet and VTU services, to
+            <strong>AI-powered image recognition</strong> with TensorFlow and C++.
+            I don't just write code — I architect systems that solve actual problems.
+          </p>
+          <p>
+            My engineering philosophy: performance first, offline-ready, clean architecture,
+            and real-time everything. I build alone when I have to, and lead teams when I can.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-aside fade-in" style="transition-delay:.1s">
+        <div class="about-chip">
+          <div class="chip-icon">📍</div>
+          <div>
+            <div class="chip-label">Location</div>
+            <div class="chip-value">Katsina, Nigeria</div>
+          </div>
+        </div>
+        <div class="about-chip">
+          <div class="chip-icon">🏢</div>
+          <div>
+            <div class="chip-label">Brand / Company</div>
+            <div class="chip-value">YS DEV</div>
+          </div>
+        </div>
+        <div class="about-chip">
+          <div class="chip-icon">💡</div>
+          <div>
+            <div class="chip-label">Specialisation</div>
+            <div class="chip-value">SaaS · Fintech · AI Systems</div>
+          </div>
+        </div>
+        <div class="about-chip">
+          <div class="chip-icon">📧</div>
+          <div>
+            <div class="chip-label">Email</div>
+            <div class="chip-value" style="font-size:.85rem">Suleiman20015kaita@gmail.com</div>
+          </div>
+        </div>
+        <div class="about-chip">
+          <div class="chip-icon">✅</div>
+          <div>
+            <div class="chip-label">Status</div>
+            <div class="chip-value" style="color:#86efac">Open to freelance & full-time</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ SKILLS ═══════════════ -->
+<section id="skills" class="skills-section">
+  <div class="container">
+    <div class="section-header centered fade-in">
+      <p class="section-label">Expertise</p>
+      <h2 class="section-title">Skills & <span class="grad">Technologies</span></h2>
+      <p class="section-sub">Core technologies I use to architect and ship production-grade systems.</p>
+    </div>
+
+    <div class="skills-outer fade-in">
+      <div>
+        <div class="skill-item">
+          <div class="skill-head"><span class="skill-name">React Native</span><span class="skill-pct">Advanced</span></div>
+          <div class="progress-track"><div class="progress-fill" data-w="92%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-head"><span class="skill-name">Node.js / Express</span><span class="skill-pct">Advanced</span></div>
+          <div class="progress-track"><div class="progress-fill" data-w="88%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-head"><span class="skill-name">MongoDB</span><span class="skill-pct">Advanced</span></div>
+          <div class="progress-track"><div class="progress-fill" data-w="87%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-head"><span class="skill-name">React.js</span><span class="skill-pct">Advanced</span></div>
+          <div class="progress-track"><div class="progress-fill" data-w="88%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-head"><span class="skill-name">C++</span><span class="skill-pct">Proficient</span></div>
+          <div class="progress-track"><div class="progress-fill" data-w="78%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-head"><span class="skill-name">TensorFlow / AI/ML</span><span class="skill-pct">Proficient</span></div>
+          <div class="progress-track"><div class="progress-fill" data-w="74%"></div></div>
+        </div>
+      </div>
+
+      <div>
+        <p class="section-label" style="margin-bottom:20px">Also use regularly</p>
+        <div class="tech-cloud">
+          <span class="tech-pill">Socket.io</span>
+          <span class="tech-pill">OpenCV</span>
+          <span class="tech-pill">Firebase</span>
+          <span class="tech-pill">JavaScript</span>
+          <span class="tech-pill">TypeScript</span>
+          <span class="tech-pill">REST APIs</span>
+          <span class="tech-pill">VTpass</span>
+          <span class="tech-pill">Monnify</span>
+          <span class="tech-pill">OPay API</span>
+          <span class="tech-pill">Canvas API</span>
+          <span class="tech-pill">Git & GitHub</span>
+          <span class="tech-pill">Offline Sync</span>
+          <span class="tech-pill">Barcode Scanning</span>
+          <span class="tech-pill">Real-time Systems</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ PROJECTS ═══════════════ -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Work</p>
+      <h2 class="section-title">Featured <span class="grad">Projects</span></h2>
+      <p class="section-sub">Production-grade systems across SaaS, fintech, AI, mobile, and game development.</p>
+    </div>
 
     <div class="projects-grid">
 
-      <!-- PROJECT 1 -->
-
-      <div class="project-card"
+      <div class="project-card fade-in"
+        data-url="https://ysstoreapp.com"
+        data-type="SaaS · POS System"
         data-title="YSStore SaaS & POS"
-        data-description="YSStore is a complete SaaS and POS ecosystem designed for supermarkets and retail businesses. The platform supports barcode scanning, receipt printing, offline MongoDB synchronization, worker management, delivery tracking, and multi-role authentication. Built with scalable backend architecture and offline-first principles."
-        data-tech="React Native • Node.js • MongoDB • Socket.io • Offline Sync">
+        data-tech="React Native · Node.js · MongoDB · Socket.io · Offline Sync"
+        data-desc="A complete multi-tenant SaaS and POS ecosystem built for supermarkets and retail businesses. Features include offline MongoDB sync, barcode scanning, receipt printing, multi-role worker management, delivery tracking, and real-time operations via Socket.io. Designed with offline-first architecture so it works even without internet.">
+        <div class="project-banner banner-saas" style="background-image: url(./banner.jpeg);background-position: top; background-size: cover; background-repeat: no-repeat;">
 
-        <div class="project-top">YSStore</div>
-
+        </div>
         <div class="project-content">
-
-          <h2>YSStore SaaS & POS</h2>
-
-          <p>
-            Complete POS and SaaS ecosystem for supermarkets with offline sync,
-            barcode scanning, receipt printing, workers management,
-            and real-time operations.
-          </p>
-
-          <div class="tags">
-            <span class="tag">React Native</span>
-            <span class="tag">MongoDB</span>
-            <span class="tag">Socket.io</span>
+          <div class="project-type">SaaS · POS System</div>
+          <h3>YSStore SaaS & POS</h3>
+          <p>Full SaaS + POS ecosystem for retail: offline sync, barcode scanning, receipt printing, worker management, and real-time ops.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="tag">React Native</span>
+              <span class="tag">MongoDB</span>
+              <span class="tag">Socket.io</span>
+            </div>
+            <div class="project-arrow">→</div>
           </div>
-
         </div>
       </div>
 
-      <!-- PROJECT 2 -->
-
-      <div class="project-card"
-        data-title="KS Bank Fintech"
-        data-description="KS Bank is a fintech platform focused on secure digital financial services. It includes wallet funding, transfers, virtual accounts, airtime purchases, bill payments, and secure payment gateway integrations such as Monnify, OPay, and VTpass APIs."
-        data-tech="Express.js • MongoDB • Fintech APIs • Virtual Accounts">
-
-        <div class="project-top">FINTECH</div>
-
+      <div class="project-card fade-in"
+        data-url="https://ks-mn.onrender.com"
+        data-type="Fintech · Banking"
+        data-title="KS Bank Fintech Platform"
+        data-tech="Express.js · MongoDB · Monnify · OPay · Virtual Accounts"
+        data-desc="A full-featured fintech platform offering wallet funding, peer-to-peer transfers, virtual account generation, airtime purchases, bill payments, and secure payment gateway integration with Monnify and OPay. Built with scalable Node.js backend and secure transaction handling.">
+        <div class="project-banner banner-fintech"  style="background-image: url(./KSBank.png);background-position: top; background-size: cover; background-repeat: no-repeat;"></div>
         <div class="project-content">
-
-          <h2>KS Bank Fintech</h2>
-
-          <p>
-            Banking and fintech platform with transfers,
-            virtual accounts, wallet funding,
-            VTU services, and API integrations.
-          </p>
-
-          <div class="tags">
-            <span class="tag">Express.js</span>
-            <span class="tag">Fintech</span>
-            <span class="tag">Payments</span>
+          <div class="project-type">Fintech · Banking</div>
+          <h3>KS Bank Fintech</h3>
+          <p>Banking platform with transfers, virtual accounts, wallet funding, VTU services, and Monnify/OPay API integrations.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="tag">Express.js</span>
+              <span class="tag">Payments</span>
+            </div>
+            <div class="project-arrow">→</div>
           </div>
-
         </div>
       </div>
 
-      <!-- PROJECT 3 -->
-
-      <div class="project-card"
+      <div class="project-card fade-in"
+        data-type="VTU · Subscriptions"
         data-title="YS Sub VTU Platform"
-        data-description="YS Sub is a VTU and subscription platform supporting airtime purchases, data subscriptions, electricity payments, cable TV subscriptions, and real-time transaction processing. Built with modern backend APIs and scalable architecture."
-        data-tech="React Native • VTpass • APIs • Node.js">
-
-        <div class="project-top">YS SUB</div>
-
+        data-tech="React Native · Node.js · VTpass API"
+        data-desc="A VTU and subscription app supporting airtime purchases, data subscriptions, electricity bill payments, cable TV (DSTV/GOTV), and real-time transaction processing. Integrated with VTpass API for reliable service delivery.">
+        <div class="project-banner banner-vtu"  style="background-image: url(./SUb.png);background-position: top; background-size: cover; background-repeat: no-repeat;"></div>
         <div class="project-content">
-
-          <h2>YS Sub VTU Platform</h2>
-
-          <p>
-            VTU and subscription application supporting airtime,
-            data, electricity payments, cable TV subscriptions,
-            and real-time transaction processing.
-          </p>
-
-          <div class="tags">
-            <span class="tag">React Native</span>
-            <span class="tag">VTpass</span>
-            <span class="tag">API</span>
+          <div class="project-type">VTU · Subscriptions</div>
+          <h3>YS Sub VTU Platform</h3>
+          <p>Airtime, data, electricity, and cable TV payments with real-time transaction processing via VTpass API.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="tag">React Native</span>
+              <span class="tag">VTpass</span>
+            </div>
+            <div class="project-arrow">→</div>
           </div>
-
         </div>
       </div>
 
-      <!-- PROJECT 4 -->
-
-      <div class="project-card"
-        data-title="Biodiversity AI"
-        data-description="An AI-powered biodiversity education platform capable of identifying species from uploaded images using TensorFlow and machine learning models. The project focuses on wildlife education and image classification systems."
-        data-tech="TensorFlow • AI • Machine Learning • C++">
-
-        <div class="project-top">AI SYSTEM</div>
-
+      <div class="project-card fade-in"
+        data-type="AI · Machine Learning"
+        data-title="Biodiversity AI Recognition"
+        data-tech="TensorFlow · C++ · Python · Image Classification"
+        data-desc="An AI-powered biodiversity education system capable of identifying plant and animal species from uploaded images. Built using TensorFlow for the ML pipeline and C++ for performance-critical inference layers. Focused on image classification and wildlife identification.">
+        <div class="project-banner banner-ai" style="background-image: url(./Bio.png);background-position: top; background-size: cover; background-repeat: no-repeat;">I</div>
         <div class="project-content">
-
-          <h2>Biodiversity AI</h2>
-
-          <p>
-            AI-powered biodiversity recognition system
-            capable of identifying species from images using TensorFlow.
-          </p>
-
-          <div class="tags">
-            <span class="tag">TensorFlow</span>
-            <span class="tag">C++</span>
-            <span class="tag">Machine Learning</span>
+          <div class="project-type">AI · Machine Learning</div>
+          <h3>Biodiversity AI</h3>
+          <p>Species identification from images using TensorFlow ML models and C++ for real-time inference performance.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="tag">TensorFlow</span>
+              <span class="tag">C++</span>
+              <span class="tag">ML</span>
+            </div>
+            <div class="project-arrow">→</div>
           </div>
-
         </div>
       </div>
 
-      <!-- PROJECT 5 -->
-
-      <div class="project-card"
+      <div class="project-card fade-in"
+        data-type="AI · Computer Vision"
         data-title="Facial Recognition System"
-        data-description="A real-time facial recognition system developed using C++, OpenCV, and AI models. The system supports face detection, recognition, and camera processing with optimized performance."
-        data-tech="C++ • OpenCV • AI • Computer Vision">
-
-        <div class="project-top">FACE AI</div>
-
+        data-tech="C++ · OpenCV · AI Models · Camera Processing"
+        data-desc="Real-time facial recognition application built with C++ and OpenCV. The system detects and recognises faces from live camera feeds using AI models, with optimised performance for embedded and desktop environments.">
+        <div class="project-banner banner-cv"  style="background-image: url(./Facial.png);background-position: top; background-size: cover; background-repeat: no-repeat;"></div>
         <div class="project-content">
-
-          <h2>Facial Recognition System</h2>
-
-          <p>
-            C++ facial recognition application using OpenCV
-            and AI models for real-time face detection.
-          </p>
-
-          <div class="tags">
-            <span class="tag">C++</span>
-            <span class="tag">OpenCV</span>
-            <span class="tag">AI</span>
+          <div class="project-type">AI · Computer Vision</div>
+          <h3>Facial Recognition System</h3>
+          <p>Real-time C++/OpenCV face detection and recognition system with AI model integration.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="tag">C++</span>
+              <span class="tag">OpenCV</span>
+              <span class="tag">AI</span>
+            </div>
+            <div class="project-arrow">→</div>
           </div>
-
         </div>
       </div>
 
-      <!-- PROJECT 6 -->
-
-      <div class="project-card"
-        data-title="Book Reading Application"
-        data-description="A modern mobile application for reading books online with categories, saved books, profiles, authentication, and responsive user experience."
-        data-tech="React Native • Firebase • Mobile UI">
-
-        <div class="project-top">BOOK APP</div>
-
+      <div class="project-card fade-in"
+        data-url="https://booking-landingpage.onrender.com/"
+        data-type="Mobile · Consumer App"
+        data-title="Book Reading App"
+        data-tech="React Native · Firebase · Authentication"
+        data-desc="A mobile reading app with categorised library browsing, bookmarking, user profiles, and authentication. Built with React Native and Firebase for real-time sync and cloud storage of reading progress.">
+        <div class="project-banner banner-book" style="background-image: url(./logo.png);background-position: top; background-size: cover; background-repeat: no-repeat;">BOOKS</div>
         <div class="project-content">
-
-          <h2>Book Reading App</h2>
-
-          <p>
-            Mobile application for reading books online
-            with modern UI, saved books,
-            categories, and user profiles.
-          </p>
-
-          <div class="tags">
-            <span class="tag">React Native</span>
-            <span class="tag">Firebase</span>
-            <span class="tag">UI/UX</span>
+          <div class="project-type">Mobile · Consumer App</div>
+          <h3>Book Reading App</h3>
+          <p>Mobile app for online reading with categories, saved books, user profiles, and Firebase backend.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="tag">React Native</span>
+              <span class="tag">Firebase</span>
+            </div>
+            <div class="project-arrow">→</div>
           </div>
-
         </div>
       </div>
 
-      <!-- PROJECT 7 -->
-
-      <div class="project-card"
-        data-title="Mario Game Clone"
-        data-description="A platform-based Mario-inspired game featuring physics, animations, character movement, collisions, obstacles, and responsive gameplay mechanics."
-        data-tech="JavaScript • Game Development • Canvas">
-
-        <div class="project-top">MARIO</div>
-
+      <div class="project-card fade-in"
+        data-url="https://mario-u0cq.onrender.com/"
+        data-type="Game Development"
+        data-title="Mario Platform Game"
+        data-tech="JavaScript · Canvas API · Game Physics"
+        data-desc="A platform game inspired by Super Mario, featuring custom physics engine, collision detection, character animations, enemy AI, scrolling levels, and gameplay systems — built entirely with vanilla JavaScript and the Canvas API.">
+        <div class="project-banner banner-game"  style="background-image: url(./MR.jpg);background-position: top; background-size: cover; background-repeat: no-repeat;"></div>
         <div class="project-content">
-
-          <h2>Mario Game Clone</h2>
-
-          <p>
-            Platform-based Mario-inspired game
-            with animations, physics,
-            movement, and gameplay systems.
-          </p>
-
-          <div class="tags">
-            <span class="tag">JavaScript</span>
-            <span class="tag">Canvas</span>
-            <span class="tag">Game Dev</span>
+          <div class="project-type">Game Development</div>
+          <h3>Mario Game Clone</h3>
+          <p>Platform game with custom physics, collision, animations, enemy AI, and scrolling levels in vanilla JS.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Canvas</span>
+            </div>
+            <div class="project-arrow">→</div>
           </div>
-
         </div>
       </div>
 
-      <!-- PROJECT 8 -->
-
-      <div class="project-card"
+      <div class="project-card fade-in"
+        data-url="https://subway-21y9.onrender.com"
+        data-type="Game Development"
         data-title="Subway Runner Game"
-        data-description="An endless runner game inspired by Subway Surfers featuring obstacles, score tracking, smooth animations, and responsive controls."
-        data-tech="JavaScript • Animations • Canvas">
-
-        <div class="project-top">SUBWAY</div>
-
+        data-tech="JavaScript · Canvas API · Animations"
+        data-desc="An endless runner game inspired by Subway Surfers with procedurally generated obstacles, smooth animations, score tracking, and increasing difficulty — built with JavaScript and the Canvas API.">
+        <div class="project-banner banner-game2" style="background-image: url(./Puzzle.png);background-position: top; background-size: cover; background-repeat: no-repeat;"></div>
         <div class="project-content">
-
-          <h2>Subway Runner Game</h2>
-
-          <p>
-            Endless runner game inspired by Subway Surfers
-            with score tracking, obstacles,
-            and smooth animations.
-          </p>
-
-          <div class="tags">
-            <span class="tag">JavaScript</span>
-            <span class="tag">Animations</span>
-            <span class="tag">Game Development</span>
+          <div class="project-type">Game Development</div>
+          <h3>Subway Runner Game</h3>
+          <p>Endless runner with procedural obstacles, score tracking, smooth animations, and increasing difficulty.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Canvas</span>
+            </div>
+            <div class="project-arrow">→</div>
           </div>
-
         </div>
       </div>
 
-      <!-- PROJECT 9 -->
-
-      <div class="project-card"
+      <div class="project-card fade-in"
+        data-type="Web Platform"
         data-title="Family Support Platform"
-        data-description="A support and communication platform designed to connect families, manage assistance systems, and improve community communication using modern backend technologies."
-        data-tech="React • Node.js • MongoDB">
-
-        <div class="project-top">SUPPORT</div>
-
+        data-tech="React · Node.js · MongoDB · REST API"
+        data-desc="A community platform for coordinating family support and assistance. Features include real-time messaging, user profiles, and request tracking. Built with a React frontend and Node.js/MongoDB backend.">
+        <div class="project-banner banner-social"  style="background-image: url(./fm.png);background-position: top; background-size: cover; background-repeat: no-repeat;">SUPPORT</div>
         <div class="project-content">
-
-          <h2>Family Support Platform</h2>
-
-          <p>
-            Community support and assistance platform
-            designed to improve communication
-            and support systems.
-          </p>
-
-          <div class="tags">
-            <span class="tag">React</span>
-            <span class="tag">Node.js</span>
-            <span class="tag">MongoDB</span>
+          <div class="project-type">Web Platform</div>
+          <h3>Family Support Platform</h3>
+          <p>Community platform for family assistance coordination with messaging, profiles, and request tracking.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="tag">React</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">MongoDB</span>
+            </div>
+            <div class="project-arrow">→</div>
           </div>
-
         </div>
       </div>
 
     </div>
-
   </div>
-
 </section>
 
-<!-- =========================
-     MODAL
-========================== -->
-
-<div class="project-modal" id="projectModal">
-
-  <div class="modal-card">
-
-    <button class="close-modal" id="closeModal">✕</button>
-
-    <div class="modal-header">
-
-      <h1 id="modalTitle">Project Title</h1>
-
-      <p id="modalTech"></p>
-
+<!-- ═══════════════ MODAL ═══════════════ -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose">✕</button>
+    <p class="modal-type" id="modalType"></p>
+    <h2 class="modal-title" id="modalTitle"></h2>
+    <p class="modal-tech" id="modalTech"></p>
+    <div class="modal-divider"></div>
+    <p class="modal-desc" id="modalDesc"></p>
+    <div class="modal-actions">
+      <a href="#contact" class="btn btn-primary" id="modalHire" onclick="closeModal()">Discuss This Project</a>
+      <a href="https://github.com/SuleimanKaita" target="_blank" class="btn btn-outline">View GitHub</a>
     </div>
-
-    <div class="modal-body">
-
-      <p id="modalDescription"></p>
-
-    </div>
-
-    <div class="modal-footer">
-
-      <a href="#contact" class="btn primary">
-        Hire Me
-      </a>
-
-    </div>
-
   </div>
-
 </div>
 
-<!-- =========================
-     ADD THIS CSS
-========================== -->
+<div class="divider"></div>
 
-
-<!-- =========================
-     ADD THIS JAVASCRIPT
-========================== -->
-
-
-
-  <!-- =========================
-       CONTACT
-  ========================== -->
-
-  <!-- =========================
-     SOCIAL MEDIA
-========================== -->
-
-<section id="social">
-
+<!-- ═══════════════ EXPERIENCE ═══════════════ -->
+<section id="experience">
   <div class="container">
-
-    <h1 class="section-title">
-      Connect with <span>Me</span>
-    </h1>
-
-    <p class="section-desc">
-      Let’s connect on social platforms where I share projects, updates, and collaborations.
-    </p>
-
-    <div class="skills-grid">
-
-      <a href="https://github.com/SuleimanKaita" target="_blank" class="skill-card" style="text-decoration:none;">
-        <div class="skill-top">
-          <span style="color: rgb(197, 197, 197);">GitHub</span>
-          <span class="yS">Code</span>
-        </div>
-        <p style="color:#94a3b8;">Explore my open-source projects and SaaS systems.</p>
-      </a>
-
-      <a href="https://www.linkedin.com/in/suleiman-yusuf-kaita-92437a345/" target="_blank" class="skill-card" style="text-decoration:none;">
-        <div class="skill-top">
-          <span style="color: rgb(197, 197, 197);">LinkedIn</span>
-          <span class="yS">Career</span>
-        </div>
-        <p style="color:#94a3b8;">Professional profile, experience & opportunities.</p>
-      </a>
-
-      <!-- <a href="https://twitter.com/YOUR_TWITTER" target="_blank" class="skill-card" style="text-decoration:none;">
-        <div class="skill-top">
-          <span>Twitter / X</span>
-          <span>Updates</span>
-        </div>
-        <p style="color:#94a3b8;">Tech thoughts, updates, and dev journey.</p>
-      </a> -->
-
-      <a href="https://wa.me/2348134518265" target="_blank" class="skill-card" style="text-decoration:none;">
-        <div class="skill-top">
-          <span style="color: rgb(197, 197, 197);">WhatsApp</span>
-          <span class="yS">Chat</span>
-        </div>
-        <p style="color:#94a3b8;">Direct contact for freelance & projects.</p>
-      </a>
-
+    <div class="section-header fade-in">
+      <p class="section-label">Journey</p>
+      <h2 class="section-title">Experience & <span class="grad">Timeline</span></h2>
     </div>
 
-  </div>
+    <div class="exp-timeline fade-in">
 
-</section>
-
-  <section id="contact">
-
-    <div class="container">
-
-      <h1 class="section-title">
-        Contact <span>Me</span>
-      </h1>
-
-      <p class="section-desc">
-        Let’s build scalable software and modern digital products together.
-      </p>
-
-      <div class="contact-container">
-
-        <div class="contact-info">
-
-          <h2>Get In Touch</h2>
-
-          <p>
-            Available for freelance projects, SaaS systems,
-            fintech applications, AI software,
-            mobile applications, and backend engineering.
-          </p>
-
-          <div class="contact-item">
-            <span>Email</span>
-            Suleiman20015kaita@gmail.com
-          </div>
-
-          <div class="contact-item">
-            <span>Location</span>
-            Katsina state, Nigeria
-          </div>
-
-          <div class="contact-item">
-            <span>Brand</span>
-            YS DEV
-          </div>
-
+      <div class="exp-item">
+        <div class="exp-period">2024 – Present</div>
+        <div class="exp-title">Founder & Lead Engineer</div>
+        <div class="exp-org">YS DEV</div>
+        <div class="exp-desc">
+          Founded YS DEV as an independent software engineering brand. Built and shipped
+          multiple production-grade systems: SaaS POS, fintech platforms, AI-powered apps,
+          and VTU services. Handled full-stack architecture, API design, UI/UX, and deployment.
         </div>
+      </div>
 
-        <!-- EMAIL FORM -->
+      <div class="exp-item">
+        <div class="exp-period">2023 – 2024</div>
+        <div class="exp-title">Freelance Full Stack Developer</div>
+        <div class="exp-org">Independent</div>
+        <div class="exp-desc">
+          Delivered freelance projects across mobile (React Native) and web (React + Node.js),
+          including client dashboards, API integrations, and mobile consumer apps.
+          Built strong foundations in backend architecture and database design.
+        </div>
+      </div>
 
-        <form class="contact-form"
-          action="https://formsubmit.co/Suleiman20015kaita@gmail.com"
-          method="POST">
-
-          <h2>Send Message</h2>
-
-          <div class="form-group">
-            <input type="text" name="name" placeholder="Your Name" required>
-          </div>
-
-          <div class="form-group">
-            <input type="email" name="email" placeholder="Your Email" required>
-          </div>
-
-          <div class="form-group">
-            <textarea name="message" placeholder="Write your message..." required></textarea>
-          </div>
-
-          <button type="submit" class="btn primary" style="width:100%">
-            Send Email
-          </button>
-
-        </form>
-
+      <div class="exp-item">
+        <div class="exp-period">2022 – 2023</div>
+        <div class="exp-title">Self-Taught Developer</div>
+        <div class="exp-org">Personal Projects</div>
+        <div class="exp-desc">
+          Started with JavaScript and web fundamentals, rapidly progressing to React,
+          Node.js, and eventually C++ and AI/ML with TensorFlow. Built game projects,
+          learning tools, and early full-stack applications.
+        </div>
       </div>
 
     </div>
+  </div>
+</section>
 
-  </section>
+<div class="divider"></div>
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
-
-  <footer>
-
-    <div class="container">
-      <p>© 2026 Suleiman Yusuf • YS DEV • All Rights Reserved.</p>
+<!-- ═══════════════ SOCIAL ═══════════════ -->
+<section id="social">
+  <div class="container">
+    <div class="section-header centered fade-in">
+      <p class="section-label">Connect</p>
+      <h2 class="section-title">Find Me <span class="grad">Online</span></h2>
+      <p class="section-sub">See my code, career updates, and get in touch directly.</p>
     </div>
 
-  </footer>
+    <div class="social-grid fade-in">
+      <a href="https://github.com/SuleimanKaita" target="_blank" class="social-card">
+        <div class="social-icon">🐙</div>
+        <div class="social-info">
+          <div class="social-name">GitHub</div>
+          <div class="social-desc">Open-source projects and repositories</div>
+        </div>
+        <div class="social-arrow">→</div>
+      </a>
 
-  <!-- =========================
-       JAVASCRIPT
-  ========================== -->
+      <a href="https://www.linkedin.com/in/suleiman-yusuf-kaita-92437a345/" target="_blank" class="social-card">
+        <div class="social-icon">💼</div>
+        <div class="social-info">
+          <div class="social-name">LinkedIn</div>
+          <div class="social-desc">Professional profile and experience</div>
+        </div>
+        <div class="social-arrow">→</div>
+      </a>
 
-  <script>
+      <a href="https://wa.me/2348134518265" target="_blank" class="social-card">
+        <div class="social-icon">💬</div>
+        <div class="social-info">
+          <div class="social-name">WhatsApp</div>
+          <div class="social-desc">Direct contact for projects and freelance</div>
+        </div>
+        <div class="social-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
 
-    // MOBILE MENU
+<div class="divider"></div>
 
-    const menuBtn = document.getElementById('menuBtn');
-    const navLinks = document.getElementById('navLinks');
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">Let's Build <span class="grad">Together</span></h2>
+      <p class="section-sub">Available for freelance, SaaS systems, fintech applications, AI software, and full-time roles.</p>
+    </div>
 
-    menuBtn.addEventListener('click',()=>{
-      navLinks.classList.toggle('active');
+    <div class="contact-wrap">
+
+      <div class="fade-in">
+        <div class="contact-detail">
+          <div class="cd-icon">📧</div>
+          <div>
+            <div class="cd-label">Email</div>
+            <a href="mailto:Suleiman20015kaita@gmail.com" class="cd-value">Suleiman20015kaita@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">📍</div>
+          <div>
+            <div class="cd-label">Location</div>
+            <div class="cd-value">Katsina, Nigeria</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">💬</div>
+          <div>
+            <div class="cd-label">WhatsApp</div>
+            <a href="https://wa.me/2348134518265" class="cd-value">+234 813 451 8265</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">⏱️</div>
+          <div>
+            <div class="cd-label">Response Time</div>
+            <div class="cd-value">Usually within 24 hours</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">✅</div>
+          <div>
+            <div class="cd-label">Availability</div>
+            <div class="cd-value" style="color:#86efac">Open to work</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-box fade-in" style="transition-delay:.1s">
+        <form action="https://formsubmit.co/Suleiman20015kaita@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New Contact from Portfolio">
+          <input type="hidden" name="_captcha" value="false">
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" name="name" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+              <label>Your Email</label>
+              <input type="email" name="email" placeholder="john@company.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Project Type</label>
+            <select name="project_type">
+              <option value="">Select a category...</option>
+              <option>SaaS / Web Application</option>
+              <option>Mobile App (React Native)</option>
+              <option>Fintech / Payment System</option>
+              <option>AI / Machine Learning</option>
+              <option>Backend API</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Message</label>
+            <textarea name="message" placeholder="Tell me about your project, timeline, and budget..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">
+            Send Message
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="container footer-inner">
+    <p class="footer-copy">© 2026 Suleiman Yusuf · YS DEV · All rights reserved.</p>
+    <div class="footer-links">
+      <a href="https://github.com/SuleimanKaita" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/suleiman-yusuf-kaita-92437a345/" target="_blank">LinkedIn</a>
+      <a href="mailto:Suleiman20015kaita@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  
+  const name="Suleiman";
+  const lastname="Yusuf";
+  const heroname=document.querySelector('.hero-name')
+  const Latsnames=document.querySelector('.line2')
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+  const ref=document.getElementById("modalHire")
+  // Skill bars
+  const skillObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.dataset.w;
+        skillObserver.unobserve(e.target);
+      }
     });
-
-    // SKILL PROGRESS BAR ANIMATION
-
-    const bars = document.querySelectorAll('.progress-bar');
-
-    const observer = new IntersectionObserver(entries => {
-
-      entries.forEach(entry => {
-
-        if(entry.isIntersecting){
-
-          const bar = entry.target;
-          bar.style.width = bar.dataset.width;
-
-        }
-
-      });
-
-    }, {threshold:0.4});
-
-    bars.forEach(bar => {
-      observer.observe(bar);
-    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.progress-fill').forEach(b => skillObserver.observe(b));
 
 
-  const modal = document.getElementById('projectModal');
-  const closeModal = document.getElementById('closeModal');
+    let index=0;
+    let move=0;
+    
+  
 
-  const modalTitle = document.getElementById('modalTitle');
-  const modalTech = document.getElementById('modalTech');
-  const modalDescription = document.getElementById('modalDescription');
+  // Fade in
+  const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
-  const cards = document.querySelectorAll('.project-card');
-
-  cards.forEach(card => {
-
-    card.addEventListener('click', () => {
-
-      modal.classList.add('active');
-
-      modalTitle.textContent = card.dataset.title;
-      modalTech.textContent = card.dataset.tech;
-      modalDescription.textContent = card.dataset.description;
-
-      document.body.style.overflow = 'hidden';
-
-    });
-
-  });
-
-  closeModal.addEventListener('click', () => {
-
-    modal.classList.remove('active');
-
-    document.body.style.overflow = 'auto';
-
-  });
-
-  modal.addEventListener('click', (e) => {
-
-    if(e.target === modal){
-
-      modal.classList.remove('active');
-
-      document.body.style.overflow = 'auto';
-
+  // Project modal
+  const url={
+    'mario':'https://mario-u0cq.onrender.com/',
+    'family':'https://family-support-psi.vercel.app/',
+    'Subway':'https://subway-21y9.onrender.com',
+    'booking':'https://booking-landingpage.onrender.com',
+    'ks':'https://ks-mn.onrender.com',
     }
-
+    
+  
+  const modal = document.getElementById('modal');
+  function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
+  let tp;
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('click', () => {
+      tp=card?.dataset?.type;
+      if(!card?.dataset?.type.startsWith("AI")){
+        ref.textContent=`Visit the ${card?.dataset?.type}`
+        ref.href=card.dataset.url
+      }
+      // alert(card?.dataset?.type)
+      document.getElementById('modalType').textContent = card.dataset.type;
+      document.getElementById('modalTitle').textContent = card.dataset.title;
+      document.getElementById('modalTech').textContent = card.dataset.tech;
+      document.getElementById('modalDesc').textContent = card.dataset.desc;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
   });
 
+  const values="mario"
+   
 
-  </script>
-
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
 </body>
 </html>
